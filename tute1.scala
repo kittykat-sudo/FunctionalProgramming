@@ -15,15 +15,20 @@ object MathProblems extends App {
 
 
     // 4. Suppose the cover price of a book is Rs. 24.95, but bookstores get a 40% discount. Shipping costs Rs. 3 for the first 50 copies and 75 cents for each additional copy. What is the total wholesale cost for 60 copies?
-    def wholesaleCost(copies : Int) : Double = {
-        val coverPrice = 24.95
-        val discount = 0.40
-        val discountedPrice = coverPrice * (1 - discount)
-        val shippingCost = if (copies > 50) 3 + (copies - 50) * 0.75 else 3
-        (discountedPrice * copies) + shippingCost
-    }
+    def calculateTotalWholesaleCost(numberOfCopies: Int): Double = {
+  val coverPrice = 24.95
+  val discountRate = 0.40
+  val discountedPrice = coverPrice * (1 - discountRate)
+  val firstCopyShipping = 3.0
+  val additionalCopyShipping = 0.75
+  val baseShippingCost = if (numberOfCopies > 50) firstCopyShipping + (additionalCopyShipping * (numberOfCopies - 50)) else firstCopyShipping
+  val totalCost = (discountedPrice * numberOfCopies) + baseShippingCost
+  totalCost
+}
 
-    println(s"Total wholesale cost for 60 copies: ${wholesaleCost(60)}")
+// Calculate the total wholesale cost for 60 copies
+val totalWholesaleCost = calculateTotalWholesaleCost(60)
+println(f"Total wholesale cost for 60 copies: Rs. $totalWholesaleCost%.2f")
 
     // 5. I run 2 km at an easy pace (8 min per km), then 3 km at Tempo (7 min per km) and 2 km at easy pace again to reach home. What is the total running time?
     def totalRunningTime(easyPaceKm: Int, tempoKm: Int, easyPaceTime: Int, tempoTime: Int): Int = {
